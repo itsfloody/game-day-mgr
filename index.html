@@ -42,7 +42,7 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 /* TIMER BAR */
 #timer-row{display:flex;align-items:center;justify-content:center;gap:14px;height:48px;padding:0 12px;background:var(--card);border-bottom:1px solid var(--border);flex-shrink:0;}
 #start-btn{background:linear-gradient(135deg,#2e7d32,#43a047);border:none;border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;padding:0 22px;height:34px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;box-shadow:0 2px 10px rgba(67,160,71,0.4);transition:all 0.2s;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
-#start-btn.paused{background:linear-gradient(135deg,#bf360c,#e64a19);box-shadow:0 2px 10px rgba(230,74,25,0.4);}
+#start-btn.paused{background:linear-gradient(135deg,#c62828,#ef5350);box-shadow:0 2px 10px rgba(198,40,40,0.3);}
 #start-btn:active{transform:scale(0.94);}
 #game-timer{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#fff;letter-spacing:3px;min-width:90px;text-align:center;transition:color 0.3s;}
 #game-timer.running{color:#69f0ae;}
@@ -623,6 +623,13 @@ function mkSlot(key,SZ){
   c.addEventListener('drop',e=>{e.preventDefault();c.classList.remove('drag-over');const p=e.dataTransfer.getData('text/plain');if(p)dropOnSlot(key,p);});
   let tTimer=null;
   c.addEventListener('click',()=>{if(tTimer){clearTimeout(tTimer);tTimer=null;if(player)openModal(player);return;}tTimer=setTimeout(()=>{tTimer=null;},280);});
+  // Touch double-tap handler for mobile
+  let lastTapTime=0;
+  c.addEventListener('touchend',e=>{
+    const currentTime=new Date().getTime(),tapLength=currentTime-lastTapTime;
+    if(tapLength<500&&tapLength>0&&player){e.preventDefault();openModal(player);}
+    lastTapTime=currentTime;
+  },{passive:false});
   wrap.appendChild(c);return wrap;
 }
 
@@ -671,6 +678,13 @@ function mkBench(p){
   wrap.addEventListener('drop',e=>{e.preventDefault();rw.style.outline='';const inc=e.dataTransfer.getData('text/plain');if(inc&&inc!==p)dropOnBench(p,inc);});
   let tt=null;
   wrap.addEventListener('click',()=>{if(tt){clearTimeout(tt);tt=null;openModal(p);return;}selectedBench=p;tt=setTimeout(()=>{tt=null;renderBench();},280);});
+  // Touch double-tap handler for mobile
+  let lastBenchTapTime=0;
+  wrap.addEventListener('touchend',e=>{
+    const currentTime=new Date().getTime(),tapLength=currentTime-lastBenchTapTime;
+    if(tapLength<500&&tapLength>0){e.preventDefault();openModal(p);}
+    lastBenchTapTime=currentTime;
+  },{passive:false});
   return wrap;
 }
 
@@ -830,9 +844,10 @@ document.getElementById('log-export-btn').onclick=()=>{saveMatchToHistory();rend
 
 /* TOUCH DRAG */
 function mkGhost(name,x,y){
-  if(touchGhost)touchGhost.remove();touchGhost=document.createElement('div');
-  touchGhost.style.cssText='position:fixed;pointer-events:none;z-index:9999;width:52px;height:52px;border-radius:50%;background:'+S.teamColor+';color:'+(lum(S.teamColor)>0.45?'#111':'#fff')+';font-family:Inter,sans-serif;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%) scale(0.88);box-shadow:0 8px 28px rgba(0,0,0,0.7);opacity:0.92;text-align:center;border:2px solid rgba(255,255,255,0.5);';
-  touchGhost.textContent=trunc(name);document.body.appendChild(touchGhost);moveGhost(x,y);
+  rmGhost();
+  touchGhost=document.createElement('div');
+  touchGhost.style.cssText='position:fixed;pointer-events:none;z-index:9999;width:48px;height:48px;border-radius:50%;background:'+S.teamColor+';color:'+(lum(S.teamColor)>0.45?'#111':'#fff')+';font-family:Inter,sans-serif;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;left:'+x+'px;top:'+y+'px;margin-left:-24px;margin-top:-24px;box-shadow:0 6px 20px rgba(0,0,0,0.6);opacity:0.88;text-align:center;border:2px solid rgba(255,255,255,0.4);';
+  touchGhost.textContent=trunc(name);document.body.appendChild(touchGhost);
 }
 function moveGhost(x,y){if(touchGhost){touchGhost.style.left=x+'px';touchGhost.style.top=y+'px';}}
 function rmGhost(){if(touchGhost){touchGhost.remove();touchGhost=null;}}
