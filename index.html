@@ -11,22 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Game Day Manager</title>
-<style>
-/* Fallback fonts for offline use */
-@supports (font-display: swap) {
-  @font-face {
-    font-family: 'Bebas Neue';
-    src: local('Arial Black'), local('sans-serif');
-    font-weight: 400;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: 'Inter';
-    src: local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto'), local('sans-serif');
-    font-weight: 400;
-    font-display: swap;
-  }
-}
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --tc:#FFD600;--tc-text:#111;
@@ -67,8 +52,8 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 /* FIELD */
 #field-wrap{flex:1;position:relative;margin:5px 7px 0;border-radius:10px;overflow:hidden;background:var(--field);border:1px solid rgba(255,255,255,0.1);box-shadow:0 4px 30px rgba(0,0,0,0.6);min-height:0;}
 #pitch-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-#field-grid{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:6px;padding:14px 2px 20px;height:100%;}
-.field-row{display:flex;justify-content:center;gap:3px;}
+#field-grid{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:20px;padding:14px 2px 16px;height:100%;}
+.field-row{display:flex;justify-content:center;gap:8px;}
 .field-slot{position:relative;border-radius:50%;border:2px solid rgba(255,255,255,0.18);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,0.3);user-select:none;flex-shrink:0;transition:box-shadow 0.15s,border-color 0.15s;-webkit-tap-highlight-color:transparent;width:var(--sz,62px);height:var(--sz,62px);}
 .field-slot.filled{background:var(--tc);border:2px solid rgba(255,255,255,0.6);box-shadow:0 2px 14px rgba(0,0,0,0.5);}
 .field-slot.invalid-slot{background:#333;border-color:var(--danger);border-style:solid;}
@@ -79,19 +64,19 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .slot-timer{font-family:'Bebas Neue',sans-serif;font-size:var(--sf,12px);color:#111;line-height:1;pointer-events:none;}
 /* Player name — white pill, black text, inside bottom of circle */
 .slot-name{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.96);color:#111;font-size:var(--snf,8px);font-weight:800;white-space:nowrap;padding:2px 5px;border-radius:5px;pointer-events:none;z-index:2;max-width:calc(var(--sz,62px) + 14px);overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 4px rgba(0,0,0,0.35);}
-.slot-badge{position:absolute;background:#fff;color:#111;font-size:8px;font-weight:900;padding:1px 3px;border-radius:3px;line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,0.4);}
+.slot-badge{position:absolute;background:#fff;color:#111;font-size:10px;font-weight:900;padding:1px 3px;border-radius:3px;line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,0.4);}
 .slot-badge.goals{top:-3px;left:1px;}
 .slot-badge.assists{top:-3px;right:1px;}
 .slot-invalid-x{position:absolute;top:-3px;right:-2px;color:var(--danger);font-size:13px;font-weight:900;pointer-events:none;}
 
 /* BENCH */
-#bench-label{font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--muted);text-align:center;padding:2px 0 2px;flex-shrink:0;}
+#bench-label{font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text);text-align:center;padding:3px 0 2px;flex-shrink:0;}
 #bench-label span{color:var(--accent);}
 #bench-wrap{flex-shrink:0;height:110px;overflow-x:auto;overflow-y:hidden;padding:2px 6px 4px;}
 #bench-wrap::-webkit-scrollbar{height:3px;}
 #bench-wrap::-webkit-scrollbar-thumb{background:#1e2a38;border-radius:2px;}
-#bench-grid{display:flex;flex-direction:row;gap:6px;height:100%;align-items:center;width:max-content;}
-.bench-player{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
+#bench-grid{display:flex;flex-direction:row;gap:8px;height:100%;align-items:center;width:max-content;}
+.bench-player{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
 .bench-ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
 .bench-ring-svg{position:absolute;top:0;left:0;pointer-events:none;}
 .bench-circle{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Bebas Neue',sans-serif;border:1.5px solid rgba(0,0,0,0.35);background:var(--tc);color:#111;position:relative;z-index:1;line-height:1;transition:border-color 0.15s;}
@@ -101,10 +86,10 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .bench-circle.bench-invalid{background:#1a1a1a;box-shadow:0 0 8px rgba(244,67,54,0.5);border-color:var(--danger);}
 .bench-circle.pulse-anim{animation:bPulse 0.85s ease-in-out infinite alternate;}
 @keyframes bPulse{from{transform:scale(1);}to{transform:scale(0.85);}}
-.bench-off-time{font-size:18px;font-family:'Bebas Neue',sans-serif;}
-.bench-name{font-size:13px;font-weight:700;color:var(--tc);background:rgba(0,0,0,0.8);padding:1px 5px;border-radius:5px;max-width:72px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;line-height:1.4;}
+.bench-off-time{font-size:20px;font-family:'Bebas Neue',sans-serif;}
+.bench-name{font-size:14px;font-weight:700;color:var(--tc);background:rgba(0,0,0,0.8);padding:2px 6px;border-radius:5px;max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;line-height:1.4;}
 .bench-name.placeholder{color:var(--muted);}
-.bench-badge{position:absolute;background:#fff;color:#111;font-size:7px;font-weight:900;padding:1px 2px;border-radius:3px;line-height:1.3;z-index:3;}
+.bench-badge{position:absolute;background:#fff;color:#111;font-size:9px;font-weight:900;padding:1px 2px;border-radius:3px;line-height:1.3;z-index:3;}
 .bench-badge.goals{left:-2px;top:-2px;}
 .bench-badge.assists{right:-2px;top:-2px;}
 
@@ -171,12 +156,12 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .modal-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:14px 16px;width:100%;max-width:360px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.8);}
 .modal-box::-webkit-scrollbar{width:4px;}
 .modal-box::-webkit-scrollbar-thumb{background:#1e2a38;}
-.modal-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1.5px;color:var(--tc);margin-bottom:10px;}
-.modal-label{font-size:13px;font-weight:700;letter-spacing:0.8px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;display:block;}
-.modal-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:18px;padding:8px 12px;outline:none;transition:border-color 0.2s;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--tc);margin-bottom:10px;}
+.modal-label{font-size:11px;font-weight:700;letter-spacing:0.8px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;display:block;}
+.modal-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:17px;padding:8px 12px;outline:none;transition:border-color 0.2s;}
 .modal-input:focus{border-color:var(--accent);}
 .modal-field{margin-bottom:10px;}
-.modal-info{font-size:14px;color:var(--muted);margin-bottom:4px;}
+.modal-info{font-size:13px;color:var(--muted);margin-bottom:4px;}
 .modal-hr{border:none;border-top:1px solid var(--border);margin:8px 0;}
 .stat-row{display:flex;align-items:center;gap:8px;margin-top:5px;}
 .stat-btn{border:none;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;padding:7px 18px;transition:opacity 0.15s;-webkit-tap-highlight-color:transparent;}
@@ -199,31 +184,20 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .sport-card{background:var(--card2);border:1.5px solid var(--border);border-radius:10px;padding:8px 6px;text-align:center;cursor:pointer;transition:all 0.18s;-webkit-tap-highlight-color:transparent;}
 .sport-card.active{border-color:var(--tc);background:rgba(255,214,0,0.07);}
 .sport-card-icon{font-size:20px;margin-bottom:2px;}
-.sport-card-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--text);}
+.sport-card-name{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--text);}
 .sport-card.active .sport-card-name{color:var(--tc);}
 .color-row{display:flex;gap:6px;margin-bottom:10px;}
 .color-swatch{flex:1;height:34px;border-radius:8px;border:2.5px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;letter-spacing:0.5px;transition:border-color 0.18s;-webkit-tap-highlight-color:transparent;}
 .color-swatch.active{border-color:#fff;}
 .slider-row{margin-bottom:8px;}
-.slider-hd{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:3px;}
-.slider-hd b{color:#fff;font-size:15px;}
+.slider-hd{display:flex;justify-content:space-between;font-size:15px;color:var(--muted);margin-bottom:3px;}
+.slider-hd b{color:#fff;font-size:14px;}
 input[type=range]{width:100%;accent-color:var(--tc);height:4px;cursor:pointer;-webkit-appearance:none;background:var(--card2);border-radius:2px;outline:none;}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--tc);border:2px solid #000;cursor:pointer;}
-
-/* SPLASH SCREEN */
-#splash{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10000;animation:splashFade 0.5s ease-out 2.2s forwards;}
-#splash-content{text-align:center;}
-#splash-logo{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;color:var(--tc);margin-bottom:12px;font-weight:700;height:64px;display:flex;align-items:center;justify-content:center;min-width:200px;}
-#splash-text{font-size:14px;color:var(--muted);letter-spacing:0.5px;}
-@keyframes splashFade{0%{opacity:1;}100%{opacity:0;pointer-events:none;}}
 </style>
 </head>
 <body>
-<div id="shell">
-<!-- SPLASH SCREEN -->
-<div id="splash"><div id="splash-content"><div id="splash-logo"></div><div id="splash-text">Game Day Manager</div></div></div>
-
-<div id="app">
+<div id="shell"><div id="app">
 
   <!-- MATCH PAGE -->
   <div id="match-page" class="page active">
@@ -250,7 +224,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <canvas id="pitch-canvas"></canvas>
       <div id="field-grid"></div>
     </div>
-    <div id="bench-label">Avg. bench time: <span id="bench-share">--:--</span> per player &nbsp;·&nbsp; Double-tap to edit</div>
+    <div id="bench-label">Avg. Bench time: <span id="bench-share">--:--</span> per player &nbsp;·&nbsp; Double-tap to edit</div>
     <div id="bench-wrap"><div id="bench-grid"></div></div>
   </div>
 
@@ -455,7 +429,7 @@ let S={
 };
 
 let matchWallStart=null,uiTimer=null,selectedBench=null;
-let touchDrag=null,lastTouch=null,touchGhost=null;
+let touchDrag=null,lastTouch=null,touchGhost=null,touchElement=null;
 let currentTab='match';
 
 /* UTILS */
@@ -564,11 +538,24 @@ document.getElementById('tab-log').onclick=()=>switchTab('log');
 
 /* RENDER */
 function renderAll(){
-  // Clean up any stray ghosts from the DOM
-  document.querySelectorAll('[style*="pointer-events:none"][style*="z-index:9999"]').forEach(el => {
-    if(el !== touchGhost && el.style.borderRadius === '50%' && el.textContent) el.remove();
-  });
-  renderScores();renderTimer();renderField();renderBench();document.getElementById('bench-share').textContent=benchShare();if(currentTab==='log')renderLog();
+  renderScores();renderTimer();
+  if(isDragging){
+    // Mid-drag: only refresh text already in DOM — don't rebuild elements
+    document.querySelectorAll('.slot-timer').forEach(el=>{
+      const slot=el.closest('.field-slot');
+      if(slot&&slot.dataset.slot){const p=S.assigned[slot.dataset.slot];if(p)el.textContent=fmt(S.timers[p]??0);}
+    });
+    document.querySelectorAll('.bench-off-time').forEach(el=>{
+      const bp=el.closest('.bench-player');
+      if(bp&&bp.dataset.player)el.textContent=fmt(S.offTimers[bp.dataset.player]??0);
+    });
+    document.getElementById('bench-share').textContent=benchShare();
+    if(currentTab==='log')renderLog();
+    return;
+  }
+  renderField();renderBench();
+  document.getElementById('bench-share').textContent=benchShare();
+  if(currentTab==='log')renderLog();
 }
 function renderScores(){document.getElementById('my-score').textContent=S.myScore;document.getElementById('opp-score').textContent=S.oppScore;}
 function renderTimer(){
@@ -659,13 +646,18 @@ function dlMatch(i){
 function slotSize(){
   const fw=document.getElementById('field-wrap');if(!fw)return 62;
   const W=fw.offsetWidth,H=fw.offsetHeight;
-  if(!W||!H)return 0; // not visible — caller should skip render
+  if(!W||!H)return 0;
   const rows=sp().grid,maxCols=Math.max(...rows.map(r=>r.length)),numRows=rows.length;
-  return Math.max(44,Math.min(Math.floor((W-12)/maxCols)-6,Math.floor((H-20)/numRows)-18,90));
+  const colGap=8; // must match .field-row gap
+  const rowGap=20; // must match #field-grid gap
+  const szW=Math.floor((W-16-(colGap*(maxCols-1)))/maxCols);
+  const szH=Math.floor((H-30-(rowGap*(numRows-1)))/numRows);
+  return Math.max(44,Math.min(szW,szH,90));
 }
 function renderField(){
   const SZ=slotSize();
   if(!SZ)return; // field not visible — skip to avoid corrupt sizing
+  if(isDragging)return; // don't rebuild field DOM mid-drag
   const fw=document.getElementById('field-wrap');
   fw.style.setProperty('--sz',SZ+'px');
   fw.style.setProperty('--sf',Math.max(11,SZ*0.32)+'px');
@@ -717,6 +709,7 @@ function mkSlot(key,SZ){
 
 /* BENCH */
 function renderBench(){
+  if(isDragging)return; // don't rebuild bench DOM mid-drag — causes ghost duplication
   const grid=document.getElementById('bench-grid');grid.innerHTML='';
   const real=S.playerNames.filter(p=>!isPH(p)),phs=S.playerNames.filter(p=>isPH(p));
   const nonA=real.filter(p=>slotOf(p)===null&&!S.invalid[p]);
@@ -725,7 +718,7 @@ function renderBench(){
   [...nonA,...invP,...phs,...assP].forEach(p=>{const el=mkBench(p);el.dataset.player=p;grid.appendChild(el);});
 }
 function mkBench(p){
-  const SZ=46,RSZ=SZ+16,isA=slotOf(p)!==null,inv=S.invalid[p]??false,sel=selectedBench===p;
+  const SZ=56,RSZ=SZ+16,isA=slotOf(p)!==null,inv=S.invalid[p]??false,sel=selectedBench===p;
   const pulse=shouldPulse(p),ph=isPH(p),off=S.offTimers[p]??0,thr=thrFor(p);
   const prog=(thr<999999&&thr>0)?Math.min(off/thr,1):0;
   const goals=S.goals[p]??0,assists=S.assists[p]??0;
@@ -800,8 +793,7 @@ function dropOnSlot(key,incoming){
   const cur=S.assigned[key]??null,curOF=onField().length,src=slotOf(incoming);
   if(src===null&&cur===null&&curOF>=S.maxOnField){alert('Max '+S.maxOnField+' players on field.');return;}
   pushUndo();const prev=new Set(onField());
-  if(src!==null)S.assigned[src]=cur;
-  S.assigned[key]=incoming;
+  if(src!==null)S.assigned[src]=cur;S.assigned[key]=incoming;
   const now=new Set(onField());
   if(cur&&!now.has(cur))logEvent('sub-off',cur,'');
   if(src&&cur)logEvent('sub',incoming,cur);
@@ -934,6 +926,8 @@ let touchStartPos=null,isDragging=false,tapRegistry={};
 function mkGhost(name,x,y){
   rmGhost();
   touchGhost=document.createElement('div');
+  const isFromBench=touchElement&&touchElement.classList.contains('bench-player');
+  const shadowStyle=isFromBench?'box-shadow:none;':'box-shadow:0 6px 24px rgba(0,0,0,0.65);';
   touchGhost.style.cssText=
     'position:fixed;pointer-events:none;z-index:9999;'+
     'width:52px;height:52px;border-radius:50%;'+
@@ -942,8 +936,9 @@ function mkGhost(name,x,y){
     'font-family:Inter,sans-serif;font-size:10px;font-weight:700;'+
     'display:flex;align-items:center;justify-content:center;'+
     'transform:translate(-50%,-50%);'+
-    'box-shadow:0 6px 24px rgba(0,0,0,0.65);opacity:0.9;text-align:center;'+
-    'border:2px solid rgba(255,255,255,0.45);'+
+    'opacity:0.9;text-align:center;'+
+    'border:none;'+
+    shadowStyle+
     'left:'+x+'px;top:'+y+'px;';
   touchGhost.textContent=trunc(name);
   document.body.appendChild(touchGhost);
@@ -990,18 +985,14 @@ document.addEventListener('touchend',e=>{
     const els=document.elementsFromPoint(x,y);
     let dropped=false;
     for(const el of els){
-      // Check if element is field-slot or has field-slot ancestor
-      const slot=el.classList&&el.classList.contains('field-slot')?el:el.closest?.('.field-slot');
-      if(slot&&slot.dataset.slot){
-        dropOnSlot(slot.dataset.slot,touchDrag);dropped=true;break;
+      if(el.classList&&el.classList.contains('field-slot')&&el.dataset.slot){
+        dropOnSlot(el.dataset.slot,touchDrag);dropped=true;break;
       }
     }
     if(!dropped){
       for(const el of els){
-        // Check if element is bench-player or has bench-player ancestor
-        const bench=el.classList&&el.classList.contains('bench-player')?el:el.closest?.('.bench-player');
-        if(bench&&bench.dataset.player&&bench.dataset.player!==touchDrag){
-          dropOnBench(bench.dataset.player,touchDrag);dropped=true;break;
+        if(el.classList&&el.classList.contains('bench-player')&&el.dataset.player&&el.dataset.player!==touchDrag){
+          dropOnBench(el.dataset.player,touchDrag);dropped=true;break;
         }
       }
     }
@@ -1022,7 +1013,6 @@ document.addEventListener('touchend',e=>{
     rmGhost();
   }
 
-  rmGhost(); // Ensure ghost is removed at end of touch
   touchDrag=null;lastTouch=null;touchElement=null;touchStartPos=null;isDragging=false;
 },{passive:true});
 
@@ -1039,16 +1029,6 @@ let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>
     // Not supported or not in fullscreen — silently ignore
   }
 })();
-
-/* SPLASH ANIMATION */
-const splashSports=['⚽','🏉','⚾','🏒'];
-let splashIndex=0;
-const splashLogo=document.getElementById('splash-logo');
-const splashInterval=setInterval(()=>{
-  splashLogo.textContent=splashSports[splashIndex]+' GDM';
-  splashIndex=(splashIndex+1)%splashSports.length;
-},500);
-setTimeout(()=>clearInterval(splashInterval),2200);
 
 /* BOOT */
 load();initSlots();applyColor();
