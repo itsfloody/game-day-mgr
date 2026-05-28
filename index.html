@@ -981,6 +981,7 @@ document.addEventListener('touchend',e=>{
 
   if(isDragging&&touchDrag&&x!==null){
     // ── DROP ──
+    isDragging=false; // Reset before drop so renderField works
     rmGhost();
     const els=document.elementsFromPoint(x,y);
     let dropped=false;
