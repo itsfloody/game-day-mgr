@@ -255,7 +255,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <canvas id="pitch-canvas"></canvas>
       <div id="field-grid"></div>
     </div>
-    <div id="bench-label">Bench time: <span id="bench-share">--:--</span> per player &nbsp;·&nbsp; Double-tap to edit</div>
+    <div id="bench-label">Avg. Bench time: <span id="bench-share">--:--</span> per player &nbsp;·&nbsp; Double-tap to edit</div>
     <div id="bench-wrap"><div id="bench-grid"></div></div>
   </div>
 
@@ -756,9 +756,10 @@ function renderEventLog(){
   if(!S.eventLog||!S.eventLog.length){el.innerHTML='<div class="log-empty">No events logged yet</div>';return;}
   el.innerHTML='<div class="event-list">'+
     [...S.eventLog].reverse().map(ev=>{
-      const icon=EVENT_ICONS[ev.type]||'•';
+      let icon=EVENT_ICONS[ev.type]||'•';
+      if(ev.type==='goal')icon=SPORT_ICONS[S.sport]||'⚽'; // Use sport icon for goals
       let desc=truncLog(ev.player);
-      if(ev.type==='goal')desc+=` scored a ${goalLabel().slice(0,-1).toLowerCase()}`;
+      if(ev.type==='goal')desc+=` scored`;
       else if(ev.type==='sub')desc=`${truncLog(ev.detail)} ⬇ OFF · ${truncLog(ev.player)} ⬆ ON`;
       else if(ev.type==='sub-on')desc+=` ON`;
       else if(ev.type==='sub-off')desc+=` OFF (no sub)`;
