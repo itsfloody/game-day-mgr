@@ -1326,6 +1326,7 @@ document.addEventListener('touchend',e=>{
   if(touchElement){touchElement.style.opacity='';touchElement.style.pointerEvents='';}
   // Always restore bench scroll, whether drag completed or not
   document.getElementById('bench-wrap').style.overflowX='auto';
+  const x=lastTouch?lastTouch.x:null,y=lastTouch?lastTouch.y:null;
 
   if(isDragging&&touchDrag&&x!==null){
     rmGhost();
