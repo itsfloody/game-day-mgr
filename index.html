@@ -64,19 +64,20 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .slot-timer{font-family:'Bebas Neue',sans-serif;font-size:var(--sf,12px);color:#111;line-height:1;pointer-events:none;}
 /* Player name — white pill, black text, inside bottom of circle */
 .slot-name{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.96);color:#111;font-size:var(--snf,8px);font-weight:800;white-space:nowrap;padding:2px 5px;border-radius:5px;pointer-events:none;z-index:2;max-width:calc(var(--sz,62px) + 14px);overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 4px rgba(0,0,0,0.35);}
-.slot-badge{position:absolute;background:#fff;color:#111;font-size:10px;font-weight:900;padding:1px 3px;border-radius:3px;line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,0.4);}
+.slot-badge{position:absolute;background:#fff;color:#111;font-size:8px;font-weight:900;padding:1px 1px;border-radius:3px;line-height:1.3;box-shadow:0 1px 3px rgba(0,0,0,0.4);}
 .slot-badge.goals{top:-3px;left:1px;}
 .slot-badge.assists{top:-3px;right:1px;}
 .slot-invalid-x{position:absolute;top:-3px;right:-2px;color:var(--danger);font-size:13px;font-weight:900;pointer-events:none;}
+.slot-yc{position:absolute;top:-2px;left:50%;transform:translateX(-50%);background:#f5c518;color:#111;font-size:7px;font-weight:900;letter-spacing:0.5px;padding:1px 2px 1px;border-radius:2px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,0.5);z-index:3;border:1px solid rgba(0,0,0,0.2);}
 
 /* BENCH */
 #bench-label{font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text);text-align:center;padding:3px 0 2px;flex-shrink:0;}
 #bench-label span{color:var(--accent);}
-#bench-wrap{flex-shrink:0;height:110px;overflow-x:auto;overflow-y:hidden;padding:2px 6px 4px;}
+#bench-wrap{flex-shrink:0;height:112px;overflow-x:auto;overflow-y:hidden;padding:2px 6px 4px;touch-action:pan-x;}
 #bench-wrap::-webkit-scrollbar{height:3px;}
 #bench-wrap::-webkit-scrollbar-thumb{background:#1e2a38;border-radius:2px;}
 #bench-grid{display:flex;flex-direction:row;gap:8px;height:100%;align-items:center;width:max-content;}
-.bench-player{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;}
+.bench-player{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;touch-action:none;}
 .bench-ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
 .bench-ring-svg{position:absolute;top:0;left:0;pointer-events:none;}
 .bench-circle{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Bebas Neue',sans-serif;border:1.5px solid rgba(0,0,0,0.35);background:var(--tc);color:#111;position:relative;z-index:1;line-height:1;transition:border-color 0.15s;}
@@ -89,9 +90,10 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .bench-off-time{font-size:20px;font-family:'Bebas Neue',sans-serif;}
 .bench-name{font-size:14px;font-weight:700;color:var(--tc);background:rgba(0,0,0,0.8);padding:2px 6px;border-radius:5px;max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;line-height:1.4;}
 .bench-name.placeholder{color:var(--muted);}
-.bench-badge{position:absolute;background:#fff;color:#111;font-size:9px;font-weight:900;padding:1px 2px;border-radius:3px;line-height:1.3;z-index:3;}
+.bench-badge{position:absolute;background:#fff;color:#111;font-size:7px;font-weight:900;padding:1px 2px;border-radius:3px;line-height:1.3;z-index:3;}
 .bench-badge.goals{left:-2px;top:-2px;}
 .bench-badge.assists{right:-2px;top:-2px;}
+.bench-yc{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#f5c518;color:#111;font-size:8px;font-weight:900;letter-spacing:0.5px;padding:1px 2px 1px;border-radius:1px;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,0.5);z-index:3;border:1px solid rgba(0,0,0,0.2);}
 
 /* LOG TAB */
 #log-page{overflow-y:auto;padding:10px 12px 8px;}
@@ -120,6 +122,12 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .log-table td.name-col{font-weight:700;color:#fff;}
 .log-bar-wrap{background:rgba(255,255,255,0.06);border-radius:3px;height:5px;overflow:hidden;margin-top:3px;}
 .log-bar{height:100%;border-radius:3px;background:var(--tc);transition:width 0.4s;}
+
+/* event timeline */
+.event-list{display:flex;flex-direction:column;gap:4px;}
+.event-item{display:flex;align-items:center;gap:8px;padding:5px 8px;background:var(--card);border-radius:6px;font-size:12px;}
+.event-time{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--tc);min-width:36px;}
+.event-desc{color:var(--text);}
 
 /* history cards */
 .hist-card{background:var(--card);border:1px solid var(--border2);border-radius:10px;margin-bottom:8px;overflow:hidden;}
@@ -173,6 +181,8 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .toggle input{opacity:0;width:0;height:0;}
 .toggle-track{position:absolute;inset:0;background:#1e2a38;border-radius:34px;border:1px solid var(--border2);transition:background 0.25s;}
 .toggle input:checked~.toggle-track{background:var(--danger);}
+.toggle.yc input:checked~.toggle-track{background:#f5c518;}
+.inline-yc{display:inline-block;background:#f5c518;color:#111;font-size:9px;font-weight:900;letter-spacing:0.5px;padding:1px 2px 1px;border-radius:1px;line-height:1;vertical-align:middle;margin-left:2px;border:1px solid rgba(0,0,0,0.15);}
 .toggle-thumb{position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 1px 4px rgba(0,0,0,0.4);}
 .toggle input:checked~.toggle-thumb{transform:translateX(20px);}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px;}
@@ -190,14 +200,35 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .color-swatch{flex:1;height:34px;border-radius:8px;border:2.5px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;letter-spacing:0.5px;transition:border-color 0.18s;-webkit-tap-highlight-color:transparent;}
 .color-swatch.active{border-color:#fff;}
 .slider-row{margin-bottom:8px;}
-.slider-hd{display:flex;justify-content:space-between;font-size:15px;color:var(--muted);margin-bottom:3px;}
+.slider-hd{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:3px;}
 .slider-hd b{color:#fff;font-size:14px;}
 input[type=range]{width:100%;accent-color:var(--tc);height:4px;cursor:pointer;-webkit-appearance:none;background:var(--card2);border-radius:2px;outline:none;}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--tc);border:2px solid #000;cursor:pointer;}
+
+/* Share URL modal */
+#share-url-modal .share-url-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:12px;padding:8px 12px;outline:none;margin-bottom:10px;word-break:break-all;}
+
+/* SPLASH SCREEN */
+#splash{transition:opacity 0.3s ease-out;}
+
+/* Replacement picker */
+.replace-btn{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:10px 12px;cursor:pointer;transition:background 0.15s,border-color 0.15s;-webkit-tap-highlight-color:transparent;width:100%;}
+.replace-btn:active{background:rgba(255,214,0,0.1);border-color:var(--tc);}
+.replace-btn-circle{width:36px;height:36px;border-radius:50%;background:var(--tc);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;color:#111;flex-shrink:0;}
+.replace-btn-name{font-size:14px;font-weight:700;color:#fff;flex:1;text-align:left;}
+.replace-btn-time{font-size:12px;color:var(--muted);}
+
+/* Confirm modal */
+.confirm-body{font-size:13px;color:#aaa;line-height:1.6;margin-bottom:14px;}
 </style>
 </head>
 <body>
+<noscript>JavaScript is required to use this app.</noscript>
 <div id="shell"><div id="app">
+  <div id="splash" style="position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:10000;flex-direction:column;">
+    <div id="splash-logo" style="font-size:48px;margin-bottom:20px;text-align:center;">⚽ GDM</div>
+    <div style="font-size:13px;color:#666;letter-spacing:1px;">Loading...</div>
+  </div>
 
   <!-- MATCH PAGE -->
   <div id="match-page" class="page active">
@@ -224,13 +255,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <canvas id="pitch-canvas"></canvas>
       <div id="field-grid"></div>
     </div>
-    <div id="bench-label">Avg. Bench time: <span id="bench-share">--:--</span> per player &nbsp;·&nbsp; Double-tap to edit</div>
+    <div id="bench-label">Bench time: <span id="bench-share">--:--</span> per player &nbsp;·&nbsp; Double-tap to edit</div>
     <div id="bench-wrap"><div id="bench-grid"></div></div>
   </div>
 
   <!-- LOG PAGE -->
   <div id="log-page" class="page">
-    <button class="log-export-btn" id="log-export-btn">💾 Save Match</button>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <button class="log-export-btn" id="log-export-btn" style="flex:1">💾 Save Match</button>
+      <button class="log-export-btn" id="share-squad-btn" style="flex:1;background:#7c3aed;">🔗 Share Squad</button>
+    </div>
 
     <!-- Score summary -->
     <div class="log-scoreline">
@@ -251,6 +285,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       </tr></thead>
       <tbody id="log-times"></tbody>
     </table>
+
+    <div class="log-section-title">📅 Match Timeline</div>
+    <div id="log-events"><div class="log-empty">No events yet</div></div>
 
     <div class="log-section-title">📋 Previous Matches</div>
     <div id="history-list"><div class="log-empty">No saved matches yet</div></div>
@@ -282,6 +319,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <div class="modal-field toggle-row">
       <label class="modal-label" style="margin:0">Injured / Unavailable</label>
       <label class="toggle"><input type="checkbox" id="pm-inv"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
+    </div>
+    <div class="modal-field toggle-row">
+      <label class="modal-label" style="margin:0">🟨 Yellow Card</label>
+      <label class="toggle yc"><input type="checkbox" id="pm-yc"><div class="toggle-track"></div><div class="toggle-thumb"></div></label>
     </div>
     <hr class="modal-hr">
     <div class="modal-field">
@@ -327,7 +368,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     <p style="font-size:13px;line-height:1.7;color:#aaa;margin-bottom:12px">
       <b style="color:#fff">Drag</b> players from bench to field slots, or between slots to swap.<br><br>
       <b style="color:#fff">Double-tap</b> any player to edit name, goals, assists, threshold, or mark injured.<br><br>
-      <b style="color:#fff">📋 Log tab</b> shows player times and saved match history. Tap a saved match to expand it.
+      <b style="color:#fff">📋 Log tab</b> shows player times, match timeline, and saved match history. Tap a saved match to expand it.<br><br>
+      <b style="color:#fff">⬆️ Import Squad</b> on the Settings page lets you share a player list with teammates via URL.
     </p>
     <hr class="modal-hr">
     <p style="font-size:12px;color:#6a7a8e;margin-bottom:14px">Built free, kept free. If it's helping, I'd appreciate the support. · Itsfloody</p>
@@ -336,6 +378,44 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
       <span style="font-size:20px">☕</span> Buy Me a Coffee on Ko-fi
     </a>
     <div class="modal-actions"><button class="modal-btn primary" id="info-close">Close</button></div>
+  </div>
+</div>
+
+<!-- SHARE URL MODAL (fix #9: replaces prompt() fallback) -->
+<div id="share-url-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-title">🔗 Share Squad</div>
+    <p style="font-size:13px;color:#aaa;margin-bottom:10px;">Tap the link below to copy it, then share with your teammates.</p>
+    <textarea id="share-url-text" class="modal-input share-url-input" rows="4" readonly style="font-size:12px;resize:none;"></textarea>
+    <div class="modal-actions">
+      <button class="modal-btn secondary" id="share-url-close">Close</button>
+      <button class="modal-btn primary" id="share-url-copy">📋 Copy</button>
+    </div>
+  </div>
+</div>
+
+<!-- REPLACEMENT PICKER MODAL -->
+<div id="replace-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-title">🚑 Pick Replacement</div>
+    <p style="font-size:13px;color:#aaa;margin-bottom:12px" id="replace-desc"></p>
+    <div id="replace-list" style="display:flex;flex-direction:column;gap:6px;max-height:260px;overflow-y:auto;margin-bottom:12px;"></div>
+    <div class="modal-actions">
+      <button class="modal-btn secondary" id="replace-skip">Remove Without Sub</button>
+      <button class="modal-btn secondary" id="replace-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL (fix #11: replaces confirm() dialogs) -->
+<div id="confirm-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box">
+    <div class="modal-title" id="confirm-title">Confirm</div>
+    <p class="confirm-body" id="confirm-body"></p>
+    <div class="modal-actions">
+      <button class="modal-btn secondary" id="confirm-cancel">Cancel</button>
+      <button class="modal-btn primary" id="confirm-ok">OK</button>
+    </div>
   </div>
 </div>
 
@@ -377,16 +457,13 @@ const SPORTS={
 const COLOR_MAP={yellow:'#FFD600',blue:'#42a5f5',red:'#ef5350',green:'#66bb6a',pink:'#ff66cc'};
 const SPORT_ICONS={football:'⚽',rugby:'🏉',softball:'⚾',hockey:'🏒'};
 
-/* Full position name lookup — key → display name */
 const POSITION_NAMES={
-  // Rugby
   LH:'Loosehead Prop',H:'Hooker',TH:'Tighthead Prop',
   LK1:'Lock 1',LK2:'Lock 2',
   BSF:'Blindside Flanker',OSF:'Openside Flanker',N8:'Number 8',
   SH:'Scrum-half',FH:'Fly-half',
   IC:'Inside Centre',OC:'Outside Centre',
   LW:'Left Wing',RW:'Right Wing',FB:'Fullback',
-  // Softball
   P:'Pitcher',C:'Catcher',
   '1B':'1st Base','2B':'2nd Base','3B':'3rd Base',
   SS:'Shortstop',LF:'Left Field',CF:'Center Field',RF:'Right Field',
@@ -398,7 +475,6 @@ function positionLabel(slot){
   return full?`${full} (${slot})`:slot;
 }
 
-/* Sport-aware stat labels */
 function goalLabel(){
   if(S.sport==='softball')return'Home Runs';
   if(S.sport==='rugby')return'Tries';
@@ -421,10 +497,10 @@ function assistBadge(){
 let S={
   sport:'football',teamColor:'#42a5f5',myScore:0,oppScore:0,
   matchStarted:false,gameSeconds:0,maxOnField:11,benchMins:7,gameMins:90,
-  playerNames:Array.from({length:20},(_,i)=>'Player'+(i+1)),
+  playerNames:Array.from({length:20},(_,i)=>'P'+(i+1)),
   playerNumbers:{},
   assigned:{},timers:{},offTimers:{},totalOff:{},
-  goals:{},assists:{},invalid:{},thresholds:{},soundPlayed:{},
+  goals:{},assists:{},invalid:{},yellowCards:{},thresholds:{},soundPlayed:{},
   gameEndPlayed:false,undoStack:[],eventLog:[],
 };
 
@@ -432,10 +508,36 @@ let matchWallStart=null,uiTimer=null,selectedBench=null;
 let touchDrag=null,lastTouch=null,touchGhost=null,touchElement=null;
 let currentTab='match';
 
+// FIX #7: Shared AudioContext — created once, reused for all beeps
+let _audioCtx=null;
+function getAudioCtx(){
+  if(!_audioCtx){
+    try{_audioCtx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){return null;}
+  }
+  // Resume if suspended (e.g. after iOS background)
+  if(_audioCtx.state==='suspended')_audioCtx.resume();
+  return _audioCtx;
+}
+
 /* UTILS */
 const fmt=s=>{const m=String(Math.floor(Math.abs(s)/60)).padStart(2,'0'),sc=String(Math.abs(s)%60).padStart(2,'0');return m+':'+sc;};
-function trunc(n){if(isPH(n))return n;const p=n.trim().split(/\s+/);return p.length===1?p[0]:p[0]+' '+p[1][0]+'.';}
-const isPH=p=>/^player\s*\d+$/i.test(p.trim());
+
+// FIX #12: trunc() caps long first names at 8 chars to prevent overflow
+function trunc(n){
+  if(isPH(n))return n;
+  const p=n.trim().split(/\s+/);
+  const first=p[0].slice(0,8);
+  return p.length===1?first:first+' '+p[1][0]+'.';
+}
+// truncLog() for log table — longer limit, still prevents overflow
+function truncLog(n){
+  if(isPH(n))return n;
+  const p=n.trim().split(/\s+/);
+  if(p.length===1)return p[0].slice(0,14);
+  return p[0].slice(0,12)+' '+p[1][0]+'.';
+}
+
+const isPH=p=>/^(player\s*\d+|p\d+)$/i.test(p.trim());
 function sp(){return SPORTS[S.sport];}
 function allSlots(){return sp().grid.flat().filter(Boolean);}
 function onField(){return Object.values(S.assigned).filter(v=>v!=null);}
@@ -456,34 +558,60 @@ function saveMatchToHistory(){
     players:S.playerNames.filter(p=>!isPH(p)).map(p=>({
       name:p,onField:fmt(S.timers[p]??0),bench:fmt(S.totalOff[p]??0),
       pct:S.gameSeconds?Math.round(((S.timers[p]??0)/S.gameSeconds)*100):0,
-      goals:S.goals[p]??0,assists:S.assists[p]??0,
+      goals:S.goals[p]??0,assists:S.assists[p]??0,yellowCard:S.yellowCards[p]??false,
     })).sort((a,b)=>b.pct-a.pct),
+    events:S.eventLog,
   };
   try{let h=JSON.parse(localStorage.getItem('gdm-hist'))||[];h.unshift(m);h=h.slice(0,15);localStorage.setItem('gdm-hist',JSON.stringify(h));}catch(e){}
 }
 function getHistory(){try{return JSON.parse(localStorage.getItem('gdm-hist'))||[];}catch(e){return[];}}
 
 /* PERSIST */
+// FIX #6: Save debounced — no longer called every tick. Called on meaningful state changes only.
+let _saveTimer=null;
 function save(){
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(()=>{
+    try{localStorage.setItem('gdm5',JSON.stringify({
+      sport:S.sport,teamColor:S.teamColor,myScore:S.myScore,oppScore:S.oppScore,
+      matchStarted:S.matchStarted,gameSeconds:S.gameSeconds,maxOnField:S.maxOnField,
+      benchMins:S.benchMins,gameMins:S.gameMins,
+      playerNames:S.playerNames,playerNumbers:S.playerNumbers,
+      assigned:S.assigned,timers:S.timers,offTimers:S.offTimers,totalOff:S.totalOff,
+      goals:S.goals,assists:S.assists,invalid:S.invalid,yellowCards:S.yellowCards,thresholds:S.thresholds,
+      soundPlayed:S.soundPlayed,gameEndPlayed:S.gameEndPlayed,eventLog:S.eventLog,
+    }));}catch(e){}
+  },300);
+}
+// Immediate save for critical moments (sub, reset, game end)
+function saveNow(){
+  clearTimeout(_saveTimer);
   try{localStorage.setItem('gdm5',JSON.stringify({
     sport:S.sport,teamColor:S.teamColor,myScore:S.myScore,oppScore:S.oppScore,
     matchStarted:S.matchStarted,gameSeconds:S.gameSeconds,maxOnField:S.maxOnField,
     benchMins:S.benchMins,gameMins:S.gameMins,
     playerNames:S.playerNames,playerNumbers:S.playerNumbers,
     assigned:S.assigned,timers:S.timers,offTimers:S.offTimers,totalOff:S.totalOff,
-    goals:S.goals,assists:S.assists,invalid:S.invalid,thresholds:S.thresholds,
+    goals:S.goals,assists:S.assists,invalid:S.invalid,yellowCards:S.yellowCards,thresholds:S.thresholds,
     soundPlayed:S.soundPlayed,gameEndPlayed:S.gameEndPlayed,eventLog:S.eventLog,
   }));}catch(e){}
 }
+// Save every 30s during active match as backstop
+setInterval(()=>{if(S.matchStarted)saveNow();},30000);
+// Save on page hide (tab switch, app background)
+document.addEventListener('visibilitychange',()=>{if(document.hidden)saveNow();});
+
 function load(){
   try{
     const raw=localStorage.getItem('gdm5');if(!raw)return;
     const d=JSON.parse(raw);Object.assign(S,d);
     if(!Array.isArray(S.undoStack))S.undoStack=[];
     if(!S.playerNumbers)S.playerNumbers={};
+    if(!S.yellowCards)S.yellowCards={};
     if(!Array.isArray(S.eventLog))S.eventLog=[];
+    const BOOL_KEYS=new Set(['invalid','yellowCards']);
     S.playerNames.forEach((p,i)=>{
-      ['timers','offTimers','totalOff','goals','assists','invalid','thresholds','soundPlayed'].forEach(k=>{if(S[k][p]==null)S[k][p]=k==='invalid'?false:0;});
+      ['timers','offTimers','totalOff','goals','assists','invalid','yellowCards','thresholds','soundPlayed'].forEach(k=>{if(S[k][p]==null)S[k][p]=BOOL_KEYS.has(k)?false:0;});
       if(!S.playerNumbers[p])S.playerNumbers[p]=i+1;
     });
   }catch(e){}
@@ -505,21 +633,50 @@ function tick(){
       const t=thrFor(p);if(t<999999&&S.offTimers[p]>=t&&!S.soundPlayed[p]){S.soundPlayed[p]=true;beep();}
     }
   });
-  if(S.gameSeconds>=(S.gameMins*60)&&!S.gameEndPlayed){S.gameEndPlayed=true;endBeep();}
-  if(S.gameSeconds%5===0)save();
+  if(S.gameSeconds>=(S.gameMins*60)&&!S.gameEndPlayed){S.gameEndPlayed=true;endBeep();saveNow();}
+  // FIX #6: Removed per-tick save. Debounced save() + 30s interval handles persistence.
   renderAll();
 }
-function beep(){try{const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;o.type='sine';g.gain.setValueAtTime(0.45,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.7);o.start();o.stop(c.currentTime+0.7);}catch(e){}}
-function endBeep(){try{const c=new(window.AudioContext||window.webkitAudioContext)();[0,0.25,0.5].forEach((t,i)=>{const o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=550+i*150;g.gain.setValueAtTime(0.45,c.currentTime+t);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+t+0.55);o.start(c.currentTime+t);o.stop(c.currentTime+t+0.55);});}catch(e){}}
+
+// FIX #7: Beep functions reuse shared AudioContext
+function beep(){
+  const c=getAudioCtx();if(!c)return;
+  try{
+    const o=c.createOscillator(),g=c.createGain();
+    o.connect(g);g.connect(c.destination);
+    o.frequency.value=880;o.type='sine';
+    g.gain.setValueAtTime(0.45,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.7);
+    o.start();o.stop(c.currentTime+0.7);
+  }catch(e){}
+}
+function endBeep(){
+  const c=getAudioCtx();if(!c)return;
+  try{
+    [0,0.25,0.5].forEach((t,i)=>{
+      const o=c.createOscillator(),g=c.createGain();
+      o.connect(g);g.connect(c.destination);
+      o.frequency.value=550+i*150;
+      g.gain.setValueAtTime(0.45,c.currentTime+t);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+t+0.55);
+      o.start(c.currentTime+t);o.stop(c.currentTime+t+0.55);
+    });
+  }catch(e){}
+}
 
 /* SLOTS / COLOR */
 function initSlots(){const na={};allSlots().forEach(s=>{na[s]=S.assigned[s]??null;});S.assigned=na;}
+function updateTabIcon(){
+  const icon=SPORT_ICONS[S.sport]||'⚽';
+  document.getElementById('tab-match').textContent=icon+' Match';
+}
 function applyColor(){
   document.documentElement.style.setProperty('--tc',S.teamColor);
   const dark=lum(S.teamColor)>0.45,txt=dark?'#111':'#fff';
   document.documentElement.style.setProperty('--tc-text',txt);
   document.getElementById('toolbar').style.background=S.teamColor;
   document.querySelectorAll('.tb-btn,.tb-tab').forEach(b=>b.style.color=txt);
+  updateTabIcon();
 }
 
 /* TAB */
@@ -530,7 +687,6 @@ function switchTab(tab){
   document.getElementById('tab-match').classList.toggle('active',tab==='match');
   document.getElementById('tab-log').classList.toggle('active',tab==='log');
   if(tab==='log')renderLog();
-  // Field is only visible on match tab — re-render now it has real dimensions
   if(tab==='match')requestAnimationFrame(()=>renderField());
 }
 document.getElementById('tab-match').onclick=()=>switchTab('match');
@@ -540,7 +696,7 @@ document.getElementById('tab-log').onclick=()=>switchTab('log');
 function renderAll(){
   renderScores();renderTimer();
   if(isDragging){
-    // Mid-drag: only refresh text already in DOM — don't rebuild elements
+    // FIX #5 (partial): Mid-drag — fast-path: only update text nodes, don't rebuild DOM
     document.querySelectorAll('.slot-timer').forEach(el=>{
       const slot=el.closest('.field-slot');
       if(slot&&slot.dataset.slot){const p=S.assigned[slot.dataset.slot];if(p)el.textContent=fmt(S.timers[p]??0);}
@@ -569,7 +725,6 @@ function renderLog(){
   document.getElementById('log-my').textContent=S.myScore;
   document.getElementById('log-opp').textContent=S.oppScore;
 
-  // Player times — sorted most on-field first
   const realPlayers=S.playerNames.filter(p=>!isPH(p));
   const sorted=[...realPlayers].sort((a,b)=>(S.timers[b]??0)-(S.timers[a]??0));
   const totalSecs=S.gameSeconds||1;
@@ -578,10 +733,10 @@ function renderLog(){
     const on=S.timers[p]??0,off=S.totalOff[p]??0,pct=Math.round((on/totalSecs)*100);
     const barW=Math.round((on/maxTime)*100);
     const dot=S.invalid[p]?'🚫':slotOf(p)?'🟢':'🟡';
-    const g=S.goals[p]??0,a=S.assists[p]??0;
-    const extras=(g>0||a>0)?` <span style="font-size:11px;color:var(--tc)">(${g>0?g+goalBadge():''}${g>0&&a>0?' ':''}${a>0?a+assistBadge():''})</span>`:'';
+    const g=S.goals[p]??0,a=S.assists[p]??0,yc=S.yellowCards[p]??false;
+    const extras=(g>0||a>0||yc)?` <span style="font-size:11px;color:var(--tc)">(${g>0?g+goalBadge():''}${g>0&&a>0?' ':''}${a>0?a+assistBadge():''})</span>${yc?'<span class="inline-yc">YC</span>':''}`:'';
     return `<tr>
-      <td class="name-col" onclick="openModal('${p.replace(/'/g,"\\'")}')" style="cursor:pointer">${dot} <span style="text-decoration:underline;text-decoration-color:rgba(255,255,255,0.25);text-underline-offset:3px">${p}</span>${extras} <span style="font-size:10px;color:var(--muted)">✏️</span></td>
+      <td class="name-col" onclick="openModal('${p.replace(/'/g,"\\'")}')" style="cursor:pointer">${dot} <span style="text-decoration:underline;text-decoration-color:rgba(255,255,255,0.25);text-underline-offset:3px">${truncLog(p)}</span>${extras} <span style="font-size:10px;color:var(--muted)">✏️</span></td>
       <td class="r">${fmt(on)}</td>
       <td class="r">${fmt(off)}</td>
       <td class="r"><span style="font-size:12px;color:${pct>=40?'var(--tc)':'var(--muted)'}">${pct}%</span>
@@ -589,8 +744,29 @@ function renderLog(){
     </tr>`;
   }).join('');
 
-  // History — expandable cards
+  // FIX #15: Render event timeline
+  renderEventLog();
   renderHistoryCards();
+}
+
+// FIX #15: Event timeline display
+const EVENT_ICONS={goal:'⚽',sub:'🔄','sub-on':'⬆️','sub-off':'⬇️','yellow-card':'🟨',injury:'🚑'};
+function renderEventLog(){
+  const el=document.getElementById('log-events');
+  if(!S.eventLog||!S.eventLog.length){el.innerHTML='<div class="log-empty">No events logged yet</div>';return;}
+  el.innerHTML='<div class="event-list">'+
+    [...S.eventLog].reverse().map(ev=>{
+      const icon=EVENT_ICONS[ev.type]||'•';
+      let desc=truncLog(ev.player);
+      if(ev.type==='goal')desc+=` scored a ${goalLabel().slice(0,-1).toLowerCase()}`;
+      else if(ev.type==='sub')desc=`${truncLog(ev.detail)} ⬇ OFF · ${truncLog(ev.player)} ⬆ ON`;
+      else if(ev.type==='sub-on')desc+=` ON`;
+      else if(ev.type==='sub-off')desc+=` OFF (no sub)`;
+      else if(ev.type==='injury')desc+=` left injured/unavailable`;
+      else if(ev.type==='yellow-card')desc+=` received a yellow card`;
+      return `<div class="event-item"><span class="event-time">${fmt(ev.t)}</span><span style="font-size:14px">${icon}</span><span class="event-desc">${desc}</span></div>`;
+    }).join('')+
+  '</div>';
 }
 
 function renderHistoryCards(){
@@ -611,14 +787,15 @@ function renderHistoryCards(){
       </div>
       <div class="hist-body" id="hbody-${i}">
         <table>
-          <thead><tr><th>Player</th><th class="r">On Field</th><th class="r">Bench</th><th class="r">%</th><th class="r">G</th><th class="r">A</th></tr></thead>
+          <thead><tr><th>Player</th><th class="r">On Field</th><th class="r">Bench</th><th class="r">%</th><th class="r">G</th><th class="r">A</th><th class="r">YC</th></tr></thead>
           <tbody>${m.players.map(p=>`<tr>
-            <td>${p.name}</td>
+            <td>${truncLog(p.name)}</td>
             <td class="r">${p.onField}</td>
             <td class="r">${p.bench}</td>
             <td class="r" style="color:${p.pct>=40?'var(--tc)':'var(--muted)'}">${p.pct}%</td>
             <td class="r">${p.goals||'—'}</td>
             <td class="r">${p.assists||'—'}</td>
+            <td class="r">${p.yellowCard?'<span class="inline-yc">YC</span>':'—'}</td>
           </tr>`).join('')}</tbody>
         </table>
         <button class="hist-dl" onclick="dlMatch(${i})">⬇ Download JSON</button>
@@ -648,16 +825,15 @@ function slotSize(){
   const W=fw.offsetWidth,H=fw.offsetHeight;
   if(!W||!H)return 0;
   const rows=sp().grid,maxCols=Math.max(...rows.map(r=>r.length)),numRows=rows.length;
-  const colGap=8; // must match .field-row gap
-  const rowGap=20; // must match #field-grid gap
+  const colGap=8,rowGap=20;
   const szW=Math.floor((W-16-(colGap*(maxCols-1)))/maxCols);
   const szH=Math.floor((H-30-(rowGap*(numRows-1)))/numRows);
   return Math.max(44,Math.min(szW,szH,90));
 }
 function renderField(){
   const SZ=slotSize();
-  if(!SZ)return; // field not visible — skip to avoid corrupt sizing
-  if(isDragging)return; // don't rebuild field DOM mid-drag
+  if(!SZ)return;
+  if(isDragging)return;
   const fw=document.getElementById('field-wrap');
   fw.style.setProperty('--sz',SZ+'px');
   fw.style.setProperty('--sf',Math.max(11,SZ*0.32)+'px');
@@ -674,9 +850,14 @@ function renderField(){
   });
   drawPitch();
 }
+
+// FIX #4: Global tap registry for field slots (mouse double-tap survives re-renders)
+const fieldTapRegistry={};
+
 function mkSlot(key,SZ){
   const player=S.assigned[key]??null,inv=player?(S.invalid[player]??false):false;
   const goals=player?(S.goals[player]??0):0,assists=player?(S.assists[player]??0):0;
+  const yc=player?(S.yellowCards[player]??false):false;
   const wrap=document.createElement('div');wrap.style.cssText='position:relative;display:flex;flex-direction:column;align-items:center;';
   const pl=document.createElement('div');pl.className='slot-pos';pl.textContent=key;wrap.appendChild(pl);
   const c=document.createElement('div');
@@ -687,6 +868,7 @@ function mkSlot(key,SZ){
     if(inv){const x=document.createElement('div');x.className='slot-invalid-x';x.textContent='✕';c.appendChild(x);}
     if(goals>0){const b=document.createElement('div');b.className='slot-badge goals';b.textContent=goals+goalBadge();c.appendChild(b);}
     if(assists>0){const b=document.createElement('div');b.className='slot-badge assists';b.textContent=assists+assistBadge();c.appendChild(b);}
+    if(yc){const b=document.createElement('div');b.className='slot-badge slot-yc';b.textContent='YC';c.appendChild(b);}
     const nm=document.createElement('div');nm.className='slot-name';nm.textContent=trunc(player);c.appendChild(nm);
     c.setAttribute('draggable','true');
     c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',player);c.classList.add('dragging');});
@@ -695,13 +877,16 @@ function mkSlot(key,SZ){
   c.addEventListener('dragover',e=>{e.preventDefault();c.classList.add('drag-over');});
   c.addEventListener('dragleave',()=>c.classList.remove('drag-over'));
   c.addEventListener('drop',e=>{e.preventDefault();c.classList.remove('drag-over');const p=e.dataTransfer.getData('text/plain');if(p)dropOnSlot(key,p);});
-  // Double-tap handled by global touch system; click kept for desktop mouse users only
-  let tTimer=null;
+  // FIX #4: Use global fieldTapRegistry keyed by slot, not scoped tTimer — survives re-renders
   c.addEventListener('click',e=>{
-    // On touch devices the global touchend handles this; skip if touch was involved
     if(e.sourceCapabilities&&!e.sourceCapabilities.firesTouchEvents){
-      if(tTimer){clearTimeout(tTimer);tTimer=null;if(player)openModal(player);return;}
-      tTimer=setTimeout(()=>{tTimer=null;},280);
+      const now=Date.now(),last=fieldTapRegistry[key]||0;
+      if(now-last<400&&now-last>0){
+        delete fieldTapRegistry[key];
+        if(player)openModal(player);
+      } else {
+        fieldTapRegistry[key]=now;
+      }
     }
   });
   wrap.appendChild(c);return wrap;
@@ -709,19 +894,28 @@ function mkSlot(key,SZ){
 
 /* BENCH */
 function renderBench(){
-  if(isDragging)return; // don't rebuild bench DOM mid-drag — causes ghost duplication
+  if(isDragging)return;
+  const benchWrap=document.getElementById('bench-wrap');
+  // FIX #10: Preserve bench scroll position across re-renders
+  const scrollLeft=benchWrap.scrollLeft;
   const grid=document.getElementById('bench-grid');grid.innerHTML='';
   const real=S.playerNames.filter(p=>!isPH(p)),phs=S.playerNames.filter(p=>isPH(p));
   const nonA=real.filter(p=>slotOf(p)===null&&!S.invalid[p]);
   const invP=real.filter(p=>S.invalid[p]);
   const assP=real.filter(p=>slotOf(p)!==null&&!S.invalid[p]);
   [...nonA,...invP,...phs,...assP].forEach(p=>{const el=mkBench(p);el.dataset.player=p;grid.appendChild(el);});
+  // Restore scroll position after DOM rebuild
+  requestAnimationFrame(()=>{ benchWrap.scrollLeft=scrollLeft; });
 }
+
+// FIX #4: Global tap registry for bench (same pattern as field slots)
+const benchTapRegistry={};
+
 function mkBench(p){
   const SZ=56,RSZ=SZ+16,isA=slotOf(p)!==null,inv=S.invalid[p]??false,sel=selectedBench===p;
   const pulse=shouldPulse(p),ph=isPH(p),off=S.offTimers[p]??0,thr=thrFor(p);
   const prog=(thr<999999&&thr>0)?Math.min(off/thr,1):0;
-  const goals=S.goals[p]??0,assists=S.assists[p]??0;
+  const goals=S.goals[p]??0,assists=S.assists[p]??0,yc=S.yellowCards[p]??false;
   const wrap=document.createElement('div');wrap.className='bench-player';
   const rw=document.createElement('div');rw.className='bench-ring-wrap';rw.style.width=RSZ+'px';rw.style.height=RSZ+'px';
   if(!ph){
@@ -744,6 +938,7 @@ function mkBench(p){
   rw.appendChild(c);
   if(goals>0&&!ph){const b=document.createElement('div');b.className='bench-badge goals';b.textContent=goals+goalBadge();rw.appendChild(b);}
   if(assists>0&&!ph){const b=document.createElement('div');b.className='bench-badge assists';b.textContent=assists+assistBadge();rw.appendChild(b);}
+  if(yc&&!ph){const b=document.createElement('div');b.className='bench-yc';b.textContent='YC';rw.appendChild(b);}
   wrap.appendChild(rw);
   const nm=document.createElement('div');nm.className='bench-name'+(ph?' placeholder':'');nm.textContent=trunc(p);wrap.appendChild(nm);
   wrap.setAttribute('draggable','true');
@@ -751,12 +946,17 @@ function mkBench(p){
   wrap.addEventListener('dragover',e=>{e.preventDefault();rw.style.outline='2px solid #29b6f6';rw.style.borderRadius='50%';});
   wrap.addEventListener('dragleave',()=>{rw.style.outline='';});
   wrap.addEventListener('drop',e=>{e.preventDefault();rw.style.outline='';const inc=e.dataTransfer.getData('text/plain');if(inc&&inc!==p)dropOnBench(p,inc);});
-  // Double-tap handled by global touch system; click kept for desktop mouse users only
-  let tt=null;
+  // FIX #4: Use global benchTapRegistry keyed by player name — survives re-renders
   wrap.addEventListener('click',e=>{
     if(e.sourceCapabilities&&!e.sourceCapabilities.firesTouchEvents){
-      if(tt){clearTimeout(tt);tt=null;openModal(p);return;}
-      selectedBench=p;tt=setTimeout(()=>{tt=null;renderBench();},280);
+      const now=Date.now(),last=benchTapRegistry[p]||0;
+      if(now-last<400&&now-last>0){
+        delete benchTapRegistry[p];
+        openModal(p);
+      } else {
+        benchTapRegistry[p]=now;
+        selectedBench=p;renderBench();
+      }
     }
   });
   return wrap;
@@ -791,24 +991,42 @@ function pushUndo(){S.undoStack.push(JSON.parse(JSON.stringify(S.assigned)));if(
 function dropOnSlot(key,incoming){
   if(!key||S.invalid[incoming])return;
   const cur=S.assigned[key]??null,curOF=onField().length,src=slotOf(incoming);
-  if(src===null&&cur===null&&curOF>=S.maxOnField){alert('Max '+S.maxOnField+' players on field.');return;}
+  // FIX #8: Use showToast instead of alert for max-players warning
+  if(src===null&&cur===null&&curOF>=S.maxOnField){showToast(`Max ${S.maxOnField} players on field`);return;}
   pushUndo();const prev=new Set(onField());
   if(src!==null)S.assigned[src]=cur;S.assigned[key]=incoming;
   const now=new Set(onField());
-  if(cur&&!now.has(cur))logEvent('sub-off',cur,'');
-  if(src&&cur)logEvent('sub',incoming,cur);
+  if(cur&&cur!==incoming){
+    if(src!==null){
+      // Field-to-field swap: both players swap slots — it's a positional move, not a sub
+    } else {
+      // Bench player replaced a field player — proper substitution
+      if(S.gameSeconds>0)logEvent('sub',incoming,cur);
+    }
+  } else if(!cur&&src===null){
+    // Bench player moved to empty slot — just coming on, no one replaced
+    if(S.gameSeconds>0)logEvent('sub-on',incoming,'');
+  } else if(src!==null&&cur===null){
+    // Field player moved to empty slot — positional move, no log needed
+  }
   now.forEach(p=>{S.offTimers[p]=0;S.soundPlayed[p]=false;});prev.forEach(p=>{if(!now.has(p))S.offTimers[p]=0;});
-  save();renderAll();
+  // FIX #2: Clear selectedBench after a drop
+  selectedBench=null;
+  saveNow();renderAll();
 }
 function dropOnBench(bench,incoming){
   if(S.invalid[incoming]||S.invalid[bench])return;
   const src=slotOf(incoming),bSlot=slotOf(bench);pushUndo();const prev=new Set(onField());
   if(src!==null)S.assigned[src]=bench;if(bSlot!==null)S.assigned[bSlot]=incoming;
   const now=new Set(onField());
-  if(src&&bSlot)logEvent('sub',incoming,bench);
-  else if(src&&!bSlot)logEvent('sub-off',incoming,'');
+  if(S.gameSeconds>0){
+    if(src&&bSlot)logEvent('sub',incoming,bench);
+    else if(src&&!bSlot)logEvent('sub-off',incoming,'');
+  }
   now.forEach(p=>{S.offTimers[p]=0;S.soundPlayed[p]=false;});prev.forEach(p=>{if(!now.has(p))S.offTimers[p]=0;});
-  save();renderAll();
+  // FIX #2: Clear selectedBench after a drop
+  selectedBench=null;
+  saveNow();renderAll();
 }
 
 /* PLAYER MODAL */
@@ -817,6 +1035,7 @@ function openModal(p){
   editing=p;eGoals=S.goals[p]??0;eAst=S.assists[p]??0;
   document.getElementById('pm-name').value=p;
   document.getElementById('pm-inv').checked=S.invalid[p]??false;
+  document.getElementById('pm-yc').checked=S.yellowCards[p]??false;
   document.getElementById('pm-thr').value=Math.round((S.thresholds[p]||(S.benchMins*60))/60);
   const slot=slotOf(p);
   document.getElementById('pm-pos').textContent='Position: '+positionLabel(slot);
@@ -832,25 +1051,125 @@ document.getElementById('pm-ginc').onclick=()=>{eGoals++;refreshStats();};
 document.getElementById('pm-gdec').onclick=()=>{eGoals=Math.max(0,eGoals-1);refreshStats();};
 document.getElementById('pm-ainc').onclick=()=>{eAst++;refreshStats();};
 document.getElementById('pm-adec').onclick=()=>{eAst=Math.max(0,eAst-1);refreshStats();};
-document.getElementById('pm-inv').onchange=e=>{if(editing){S.invalid[editing]=e.target.checked;if(e.target.checked){const s=slotOf(editing);if(s)S.assigned[s]=null;}renderAll();}};
+document.getElementById('pm-inv').onchange=e=>{
+  if(!editing)return;
+  const turningOn=e.target.checked;
+  if(turningOn){
+    const slot=slotOf(editing);
+    if(slot){
+      // Player is on the field — need a replacement
+      const available=S.playerNames.filter(p=>
+        !isPH(p)&&slotOf(p)===null&&!S.invalid[p]&&p!==editing
+      );
+      // Hide player modal while picker is shown
+      document.getElementById('player-modal').style.display='none';
+      showReplacePicker(editing,slot,available,()=>{
+        // On cancel: uncheck the toggle and reopen player modal
+        document.getElementById('pm-inv').checked=false;
+        document.getElementById('player-modal').style.display='flex';
+      });
+      return;
+    }
+  }
+  // Player is on bench or being un-marked — apply immediately
+  S.invalid[editing]=turningOn;
+  renderAll();
+};
+
+let _replaceTarget=null,_replaceSlot=null;
+
+function showReplacePicker(injuredPlayer,slot,available,onCancel){
+  _replaceTarget=injuredPlayer;_replaceSlot=slot;
+  document.getElementById('replace-desc').textContent=
+    `${truncLog(injuredPlayer)} is injured/unavailable. Who replaces them at ${positionLabel(slot)}?`;
+  const list=document.getElementById('replace-list');
+  list.innerHTML='';
+  if(!available.length){
+    list.innerHTML='<div class="log-empty">No available bench players</div>';
+  } else {
+    available
+      .sort((a,b)=>(S.offTimers[b]??0)-(S.offTimers[a]??0)) // longest on bench first
+      .forEach(p=>{
+        const btn=document.createElement('button');
+        btn.className='replace-btn';
+        btn.innerHTML=`
+          <div class="replace-btn-circle">${trunc(p).slice(0,2).toUpperCase()}</div>
+          <span class="replace-btn-name">${truncLog(p)}</span>
+          <span class="replace-btn-time">Bench: ${fmt(S.offTimers[p]??0)}</span>`;
+        btn.onclick=()=>confirmReplacement(p);
+        list.appendChild(btn);
+      });
+  }
+  document.getElementById('replace-modal').style.display='flex';
+
+  document.getElementById('replace-cancel').onclick=()=>{
+    document.getElementById('replace-modal').style.display='none';
+    _replaceTarget=null;_replaceSlot=null;
+    if(onCancel)onCancel();
+  };
+  document.getElementById('replace-skip').onclick=()=>{
+    document.getElementById('replace-modal').style.display='none';
+    applyInjury(_replaceTarget,_replaceSlot,null);
+    _replaceTarget=null;_replaceSlot=null;
+    // Close player modal cleanly
+    document.getElementById('player-modal').style.display='none';
+    editing=null;
+  };
+}
+
+function confirmReplacement(replacement){
+  document.getElementById('replace-modal').style.display='none';
+  applyInjury(_replaceTarget,_replaceSlot,replacement);
+  _replaceTarget=null;_replaceSlot=null;
+  document.getElementById('player-modal').style.display='none';
+  editing=null;
+}
+
+function applyInjury(injured,slot,replacement){
+  pushUndo();
+  // Mark injured
+  S.invalid[injured]=true;
+  if(replacement){
+    // Sub replacement in
+    S.assigned[slot]=replacement;
+    S.offTimers[replacement]=0;S.soundPlayed[replacement]=false;
+    logEvent('sub',replacement,injured);
+    logEvent('injury',injured,'');
+  } else {
+    // No replacement — just vacate the slot
+    S.assigned[slot]=null;
+    logEvent('injury',injured,'');
+  }
+  saveNow();renderAll();
+  showToast(replacement
+    ? `🚑 ${truncLog(injured)} off · ${truncLog(replacement)} on`
+    : ` ${truncLog(injured)} removed - unavailable`);
+}
+document.getElementById('pm-yc').onchange=e=>{if(editing){S.yellowCards[editing]=e.target.checked;renderAll();}};
 document.getElementById('pm-cancel').onclick=()=>{document.getElementById('player-modal').style.display='none';editing=null;};
 document.getElementById('pm-save').onclick=()=>{
   if(!editing)return;
   const newName=document.getElementById('pm-name').value.trim();
   const thrM=parseInt(document.getElementById('pm-thr').value)||(S.benchMins);
   const isInv=document.getElementById('pm-inv').checked;
+  const isYC=document.getElementById('pm-yc').checked;
   const prevGoals=S.goals[editing]??0;
+  const prevYC=S.yellowCards[editing]??false;
   if(newName&&newName!==editing){
-    if(S.playerNames.some(p=>p.toLowerCase()===newName.toLowerCase()&&p!==editing)){alert('"'+newName+'" already exists.');return;}
+    if(S.playerNames.some(p=>p.toLowerCase()===newName.toLowerCase()&&p!==editing)){showToast('"'+newName+'" already exists.');return;}
     const idx=S.playerNames.indexOf(editing);if(idx!==-1)S.playerNames[idx]=newName;
-    ['timers','offTimers','totalOff','goals','assists','invalid','thresholds','soundPlayed','playerNumbers'].forEach(k=>{if(editing in S[k]){S[k][newName]=S[k][editing];delete S[k][editing];}});
+    ['timers','offTimers','totalOff','goals','assists','invalid','yellowCards','thresholds','soundPlayed','playerNumbers'].forEach(k=>{if(editing in S[k]){S[k][newName]=S[k][editing];delete S[k][editing];}});
     for(const slot of Object.keys(S.assigned))if(S.assigned[slot]===editing)S.assigned[slot]=newName;
     editing=newName;
   }
   if(eGoals>prevGoals)logEvent('goal',editing,'');
-  S.goals[editing]=eGoals;S.assists[editing]=eAst;S.invalid[editing]=isInv;S.thresholds[editing]=thrM*60;
-  if(isInv){const s=slotOf(editing);if(s)S.assigned[s]=null;}
-  document.getElementById('player-modal').style.display='none';editing=null;save();renderAll();
+  if(isYC&&!prevYC)logEvent('yellow-card',editing,'');
+  S.goals[editing]=eGoals;S.assists[editing]=eAst;
+  S.invalid[editing]=isInv;S.yellowCards[editing]=isYC;
+  S.thresholds[editing]=thrM*60;
+  // Only clear the slot here if marked invalid AND still on field (picker wasn't used)
+  if(isInv){const s=slotOf(editing);if(s){S.assigned[s]=null;}}
+  document.getElementById('player-modal').style.display='none';editing=null;saveNow();renderAll();
 };
 
 /* SETTINGS */
@@ -884,7 +1203,7 @@ document.getElementById('s-cancel').onclick=()=>document.getElementById('setting
 document.getElementById('s-ok').onclick=()=>{
   const changed=ssSport!==S.sport;S.teamColor=ssColor;S.maxOnField=ssMax;S.benchMins=ssBench;S.gameMins=ssGame;
   if(changed){S.sport=ssSport;initSlots();resetMatch();}
-  applyColor();document.getElementById('settings-modal').style.display='none';save();renderAll();
+  applyColor();updateTabIcon();document.getElementById('settings-modal').style.display='none';save();renderAll();
 };
 
 /* INFO */
@@ -903,31 +1222,59 @@ document.getElementById('start-btn').onclick=()=>{
   S.matchStarted=!S.matchStarted;
   if(S.matchStarted){matchWallStart=Date.now()-S.gameSeconds*1000;startTimer();}
   else stopTimer();
-  save();renderTimer();
+  saveNow();renderTimer();
 };
-document.getElementById('reset-btn').onclick=()=>{
-  if(!confirm('Reset match?'))return;
-  if(S.gameSeconds>60&&confirm('Save this match to history first?'))saveMatchToHistory();
+
+// FIX #11: Custom confirm modal replaces native confirm() / alert()
+let _confirmResolve=null;
+function showConfirm(title,body,okLabel,cancelLabel){
+  okLabel=okLabel||'OK';cancelLabel=cancelLabel||'Cancel';
+  return new Promise(resolve=>{
+    _confirmResolve=resolve;
+    document.getElementById('confirm-title').textContent=title;
+    document.getElementById('confirm-body').textContent=body;
+    document.getElementById('confirm-ok').textContent=okLabel;
+    document.getElementById('confirm-cancel').textContent=cancelLabel;
+    document.getElementById('confirm-modal').style.display='flex';
+  });
+}
+document.getElementById('confirm-ok').onclick=()=>{document.getElementById('confirm-modal').style.display='none';if(_confirmResolve){_confirmResolve(true);_confirmResolve=null;}};
+document.getElementById('confirm-cancel').onclick=()=>{document.getElementById('confirm-modal').style.display='none';if(_confirmResolve){_confirmResolve(false);_confirmResolve=null;}};
+
+document.getElementById('reset-btn').onclick=async()=>{
+  const ok=await showConfirm('Reset Match','This will clear all timers, scores, and assignments.','Reset','Keep Playing');
+  if(!ok)return;
+  if(S.gameSeconds>60){
+    const save2=await showConfirm('Save to History?','Save this match to history before resetting?','Save & Reset','Skip & Reset');
+    if(save2)saveMatchToHistory();
+  }
   resetMatch();
 };
+
 function resetMatch(){
   stopTimer();matchWallStart=null;S.matchStarted=false;S.gameSeconds=0;S.myScore=0;S.oppScore=0;
-  S.playerNames.forEach(p=>{S.timers[p]=0;S.offTimers[p]=0;S.totalOff[p]=0;S.goals[p]=0;S.assists[p]=0;S.soundPlayed[p]=false;});
-  S.invalid={};allSlots().forEach(sl=>S.assigned[sl]=null);S.undoStack=[];S.gameEndPlayed=false;selectedBench=null;S.eventLog=[];
-  save();renderAll();if(currentTab==='log')renderHistoryCards();
+  // FIX #1: Properly re-init boolean fields so ?? checks are consistent
+  S.invalid={};S.yellowCards={};
+  S.playerNames.forEach(p=>{
+    S.timers[p]=0;S.offTimers[p]=0;S.totalOff[p]=0;
+    S.goals[p]=0;S.assists[p]=0;
+    S.soundPlayed[p]=false;
+    S.invalid[p]=false;S.yellowCards[p]=false;
+  });
+  allSlots().forEach(sl=>S.assigned[sl]=null);
+  S.undoStack=[];S.gameEndPlayed=false;selectedBench=null;S.eventLog=[];
+  saveNow();renderAll();if(currentTab==='log')renderHistoryCards();
 }
-document.getElementById('undo-btn').onclick=()=>{if(!S.undoStack.length)return;S.assigned=S.undoStack.pop();save();renderAll();};
-document.getElementById('log-export-btn').onclick=()=>{saveMatchToHistory();renderHistoryCards();};
+document.getElementById('undo-btn').onclick=()=>{if(!S.undoStack.length)return;S.assigned=S.undoStack.pop();saveNow();renderAll();};
+document.getElementById('log-export-btn').onclick=()=>{saveMatchToHistory();renderHistoryCards();showToast('✅ Match saved!');};
 
-/* TOUCH DRAG — threshold-based: ghost only appears after real movement */
-const DRAG_THR=10; // px before drag mode locks in
+/* TOUCH DRAG */
+const DRAG_THR=10;
 let touchStartPos=null,isDragging=false,tapRegistry={};
 
 function mkGhost(name,x,y){
   rmGhost();
   touchGhost=document.createElement('div');
-  const isFromBench=touchElement&&touchElement.classList.contains('bench-player');
-  const shadowStyle=isFromBench?'box-shadow:none;':'box-shadow:0 6px 24px rgba(0,0,0,0.65);';
   touchGhost.style.cssText=
     'position:fixed;pointer-events:none;z-index:9999;'+
     'width:52px;height:52px;border-radius:50%;'+
@@ -936,9 +1283,8 @@ function mkGhost(name,x,y){
     'font-family:Inter,sans-serif;font-size:10px;font-weight:700;'+
     'display:flex;align-items:center;justify-content:center;'+
     'transform:translate(-50%,-50%);'+
-    'opacity:0.9;text-align:center;'+
-    'border:none;'+
-    shadowStyle+
+    'box-shadow:0 6px 24px rgba(0,0,0,0.65);opacity:0.9;text-align:center;'+
+    'border:2px solid rgba(255,255,255,0.45);'+
     'left:'+x+'px;top:'+y+'px;';
   touchGhost.textContent=trunc(name);
   document.body.appendChild(touchGhost);
@@ -965,9 +1311,10 @@ document.addEventListener('touchmove',e=>{
   if(!isDragging){
     const dx=x-touchStartPos.x,dy=y-touchStartPos.y;
     if(Math.sqrt(dx*dx+dy*dy)<DRAG_THR)return;
-    // Threshold crossed — commit to drag mode
     isDragging=true;
-    if(touchElement)touchElement.style.opacity='0.35';
+    if(touchElement){touchElement.style.opacity='0.15';touchElement.style.pointerEvents='none';}
+    // Lock bench scroll so it doesn't fight the drag
+    document.getElementById('bench-wrap').style.overflowX='hidden';
     mkGhost(touchDrag,x,y);
     if(navigator.vibrate)navigator.vibrate(40);
   } else {
@@ -976,12 +1323,11 @@ document.addEventListener('touchmove',e=>{
 },{passive:true});
 
 document.addEventListener('touchend',e=>{
-  if(touchElement)touchElement.style.opacity='';
-  const x=lastTouch?lastTouch.x:null,y=lastTouch?lastTouch.y:null;
+  if(touchElement){touchElement.style.opacity='';touchElement.style.pointerEvents='';}
+  // Always restore bench scroll, whether drag completed or not
+  document.getElementById('bench-wrap').style.overflowX='auto';
 
   if(isDragging&&touchDrag&&x!==null){
-    // ── DROP ──
-    isDragging=false; // Reset before drop so renderField works
     rmGhost();
     const els=document.elementsFromPoint(x,y);
     let dropped=false;
@@ -998,7 +1344,6 @@ document.addEventListener('touchend',e=>{
       }
     }
   } else if(touchDrag){
-    // ── TAP — double-tap detection ──
     rmGhost();
     const now=Date.now(),last=tapRegistry[touchDrag]||0;
     if(now-last<450&&now-last>0){
@@ -1017,26 +1362,156 @@ document.addEventListener('touchend',e=>{
   touchDrag=null;lastTouch=null;touchElement=null;touchStartPos=null;isDragging=false;
 },{passive:true});
 
-/* RESIZE */
+/* SHARE ROSTER */
+function encodeSquad(names){
+  const real=names.filter(n=>!isPH(n));
+  const json=JSON.stringify({v:1,sport:S.sport,players:real});
+  return btoa(unescape(encodeURIComponent(json)));
+}
+
+function decodeSquad(str){
+  try{const json=decodeURIComponent(escape(atob(str)));return JSON.parse(json);}catch(e){return null;}
+}
+
+document.getElementById('share-squad-btn').onclick=()=>{
+  const real=S.playerNames.filter(n=>!isPH(n));
+  if(!real.length){showToast('No named players to share yet.');return;}
+  const code=encodeSquad(real);
+  const url=location.origin+location.pathname+'?squad='+code;
+
+  if(navigator.share){
+    navigator.share({
+      title:'Game Day Manager — Team Squad',
+      text:`Here's our squad for ${SPORTS[S.sport].name} — open in Game Day Manager to import.`,
+      url
+    }).catch(()=>{
+      // Fall through to modal if share is cancelled or fails
+      showShareUrlModal(url);
+    });
+  } else {
+    // FIX #9: Use Web Share API first, then custom modal — never prompt()
+    navigator.clipboard.writeText(url).then(()=>{
+      showToast('📋 Link copied to clipboard!');
+    }).catch(()=>{
+      showShareUrlModal(url);
+    });
+  }
+};
+
+function showShareUrlModal(url){
+  document.getElementById('share-url-text').value=url;
+  document.getElementById('share-url-modal').style.display='flex';
+}
+document.getElementById('share-url-close').onclick=()=>document.getElementById('share-url-modal').style.display='none';
+document.getElementById('share-url-copy').onclick=()=>{
+  const ta=document.getElementById('share-url-text');
+  ta.select();ta.setSelectionRange(0,99999);
+  navigator.clipboard.writeText(ta.value).then(()=>{
+    showToast('📋 Copied!');
+  }).catch(()=>{
+    // Last resort: execCommand for very old browsers
+    try{document.execCommand('copy');showToast('📋 Copied!');}catch(e){showToast('Select the link above and copy manually');}
+  });
+};
+
+function checkImportFromURL(){
+  const params=new URLSearchParams(location.search);
+  const code=params.get('squad');
+  if(!code)return;
+
+  const data=decodeSquad(code);
+  if(!data||!Array.isArray(data.players)||!data.players.length)return;
+
+  // FIX #13: Clean URL immediately to prevent re-trigger on refresh
+  history.replaceState(null,'',location.pathname);
+
+  const names=data.players.filter(n=>n&&n.trim()&&!isPH(n));
+  if(!names.length)return;
+
+  const sport=data.sport&&SPORTS[data.sport]?SPORTS[data.sport].name:'Unknown';
+  const modal=document.createElement('div');
+  modal.className='modal-overlay';
+  modal.innerHTML=`
+    <div class="modal-box">
+      <div class="modal-title">📥 Import Squad</div>
+      <p style="font-size:13px;color:#aaa;line-height:1.6;margin-bottom:12px">
+        A <b style="color:#fff">${sport}</b> squad with <b style="color:#fff">${names.length} player${names.length!==1?'s':''}</b> has been shared with you:
+      </p>
+      <div style="background:var(--card2);border-radius:8px;padding:10px 12px;margin-bottom:14px;max-height:180px;overflow-y:auto;">
+        ${names.map(n=>`<div style="font-size:13px;color:var(--text);padding:3px 0;border-bottom:1px solid var(--border)">${n}</div>`).join('')}
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px">⚠️ This will replace your current player list. Your match data will be cleared.</p>
+      <div class="modal-actions">
+        <button class="modal-btn secondary" id="import-cancel">Cancel</button>
+        <button class="modal-btn primary" id="import-confirm">Import</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+
+  document.getElementById('import-cancel').onclick=()=>modal.remove();
+  document.getElementById('import-confirm').onclick=()=>{
+    modal.remove();
+    const filled=names.slice(0,20);
+    const needed=20-filled.length;
+    const placeholders=Array.from({length:needed},(_,i)=>'P'+(filled.length+i+1));
+    S.playerNames=[...filled,...placeholders];
+
+    S.timers={};S.offTimers={};S.totalOff={};S.goals={};S.assists={};
+    S.invalid={};S.thresholds={};S.soundPlayed={};S.playerNumbers={};S.yellowCards={};
+    S.playerNames.forEach((p,i)=>{
+      S.timers[p]=0;S.offTimers[p]=0;S.totalOff[p]=0;
+      S.goals[p]=0;S.assists[p]=0;S.invalid[p]=false;
+      S.thresholds[p]=0;S.soundPlayed[p]=false;
+      S.playerNumbers[p]=i+1;S.yellowCards[p]=false;
+    });
+
+    if(data.sport&&SPORTS[data.sport]&&data.sport!==S.sport){S.sport=data.sport;}
+
+    resetMatch();
+    showToast(`✅ ${filled.length} players imported!`);
+  };
+}
+
+function showToast(msg){
+  const t=document.createElement('div');
+  t.style.cssText='position:fixed;bottom:calc(var(--tb-h) + env(safe-area-inset-bottom,0px) + 12px);left:50%;transform:translateX(-50%);background:#222;color:#fff;font-size:13px;font-weight:600;padding:10px 18px;border-radius:20px;z-index:9999;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.5);pointer-events:none;';
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2800);
+}
+
 let rT;window.addEventListener('resize',()=>{clearTimeout(rT);rT=setTimeout(()=>{renderAll();},120);});
 
 /* ORIENTATION LOCK */
 (async()=>{
   try{
-    if(screen.orientation&&screen.orientation.lock){
-      await screen.orientation.lock('portrait');
-    }
-  }catch(e){
-    // Not supported or not in fullscreen — silently ignore
-  }
+    if(screen.orientation&&screen.orientation.lock){await screen.orientation.lock('portrait');}
+  }catch(e){}
 })();
 
 /* BOOT */
-load();initSlots();applyColor();
-S.playerNames=S.playerNames.map(p=>{const m=p.match(/^Player\s+(\d+)$/i);return m?'Player'+m[1]:p;});
+load();initSlots();applyColor();updateTabIcon();
+S.playerNames=S.playerNames.map(p=>{const m=p.match(/^Player\s*(\d+)$/i);return m?'P'+m[1]:p;});
 S.playerNames.forEach((p,i)=>{if(!S.playerNumbers[p])S.playerNumbers[p]=i+1;});
 if(S.matchStarted){matchWallStart=Date.now()-S.gameSeconds*1000;startTimer();}
+checkImportFromURL();
 renderAll();
+
+// Splash screen
+const splashSports=['⚽','🏉','⚾','🏒'];
+let splashIndex=0;
+const splashLogo=document.getElementById('splash-logo');
+const splashInterval=setInterval(()=>{
+  splashLogo.textContent=splashSports[splashIndex]+' GDM';
+  splashIndex=(splashIndex+1)%splashSports.length;
+},500);
+setTimeout(()=>{
+  clearInterval(splashInterval);
+  const splash=document.getElementById('splash');
+  if(splash)splash.style.opacity='0';
+  setTimeout(()=>{if(splash)splash.remove();},300);
+},2200);
+
 requestAnimationFrame(()=>{renderField();});
 </script>
 </body>
