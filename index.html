@@ -1327,8 +1327,10 @@ document.addEventListener('touchend',e=>{
   // Always restore bench scroll, whether drag completed or not
   document.getElementById('bench-wrap').style.overflowX='auto';
   const x=lastTouch?lastTouch.x:null,y=lastTouch?lastTouch.y:null;
+  const wasDragging=isDragging;
+  isDragging=false; // Reset BEFORE calling drop handlers so renderField() can run
 
-  if(isDragging&&touchDrag&&x!==null){
+  if(wasDragging&&touchDrag&&x!==null){
     rmGhost();
     const els=document.elementsFromPoint(x,y);
     let dropped=false;
@@ -1360,7 +1362,7 @@ document.addEventListener('touchend',e=>{
     rmGhost();
   }
 
-  touchDrag=null;lastTouch=null;touchElement=null;touchStartPos=null;isDragging=false;
+  touchDrag=null;lastTouch=null;touchElement=null;touchStartPos=null;
 },{passive:true});
 
 /* SHARE ROSTER */
