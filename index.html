@@ -73,11 +73,11 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 /* BENCH */
 #bench-label{font-size:12px;font-weight:600;letter-spacing:0.5px;color:var(--text);text-align:center;padding:3px 0 2px;flex-shrink:0;}
 #bench-label span{color:var(--accent);}
-#bench-wrap{flex-shrink:0;height:112px;overflow-x:auto;overflow-y:hidden;padding:2px 6px 4px;touch-action:pan-x;}
+#bench-wrap{flex-shrink:0;height:112px;overflow-x:auto;overflow-y:hidden;padding:2px 6px 4px;touch-action:pan-x;-webkit-user-select:none;}
 #bench-wrap::-webkit-scrollbar{height:3px;}
 #bench-wrap::-webkit-scrollbar-thumb{background:#1e2a38;border-radius:2px;}
 #bench-grid{display:flex;flex-direction:row;gap:8px;height:100%;align-items:center;width:max-content;}
-.bench-player{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;touch-action:none;}
+.bench-player{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;flex-shrink:0;touch-action:pan-x;}
 .bench-ring-wrap{position:relative;display:flex;align-items:center;justify-content:center;}
 .bench-ring-svg{position:absolute;top:0;left:0;pointer-events:none;}
 .bench-circle{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Bebas Neue',sans-serif;border:1.5px solid rgba(0,0,0,0.35);background:var(--tc);color:#111;position:relative;z-index:1;line-height:1;transition:border-color 0.15s;}
@@ -1298,7 +1298,7 @@ document.addEventListener('touchstart',e=>{
   const sc=t.closest('.field-slot'),bc=t.closest('.bench-player');
   if(sc&&sc.dataset.slot){name=S.assigned[sc.dataset.slot]??null;el=sc;}
   else if(bc&&bc.dataset.player){name=bc.dataset.player;el=bc;}
-  if(!name)return;
+  if(!name)return; // Don't capture — allow native scroll on empty space
   touchDrag=name;touchElement=el;
   touchStartPos={x:e.touches[0].clientX,y:e.touches[0].clientY};
   lastTouch={x:e.touches[0].clientX,y:e.touches[0].clientY};
