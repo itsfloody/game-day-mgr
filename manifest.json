@@ -1,16 +1,13 @@
 {
   "name": "Game Day Manager",
   "short_name": "GDM",
-  "description": "Track players, substitutions, scores and time on field \u2014 built for coaches on the sideline.",
-  "start_url": "/",
+  "description": "Track players, substitutions, scores and time on field — built for coaches on the sideline.",
+  "start_url": "  ",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#000000",
   "theme_color": "#FFD600",
-  "categories": [
-    "sports",
-    "utilities"
-  ],
+  "categories": ["sports", "utilities"],
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -23,6 +20,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
   "screenshots": [],

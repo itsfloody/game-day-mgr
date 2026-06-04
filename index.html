@@ -202,6 +202,7 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .modal-box::-webkit-scrollbar-thumb{background:#1e2a38;}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--tc);margin-bottom:10px;}
 .modal-label{font-size:11px;font-weight:700;letter-spacing:0.8px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;display:block;}
+.modal-label span{color:#fff;font-size:15px;}
 .modal-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:17px;padding:8px 12px;outline:none;transition:border-color 0.2s;}
 .modal-input:focus{border-color:var(--accent);}
 .modal-field{margin-bottom:10px;}
@@ -236,9 +237,9 @@ html,body{height:100%;background:#000;font-family:'Inter',sans-serif;color:var(-
 .color-swatch{flex:1;height:34px;border-radius:8px;border:2.5px solid transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;letter-spacing:0.5px;transition:border-color 0.18s;-webkit-tap-highlight-color:transparent;}
 .color-swatch.active{border-color:#fff;}
 .slider-row{margin-bottom:8px;}
-.slider-hd{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:3px;}
-.slider-hd b{color:#fff;font-size:14px;}
-input[type=range]{width:100%;accent-color:var(--tc);height:4px;cursor:pointer;-webkit-appearance:none;background:var(--card2);border-radius:2px;outline:none;}
+.slider-hd{display:flex;justify-content:space-between;font-size:12px;color:var(--text);margin-bottom:3px;}
+.slider-hd b{color:#fff;font-size:14px;padding-left:6px;}
+input[type=range]{width:100%;accent-color:var(--tc);height:4px;cursor:pointer;appearance:none;-webkit-appearance:none;background:var(--card2);border-radius:2px;outline:none;}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--tc);border:2px solid #000;cursor:pointer;}
 #share-url-modal .share-url-input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:12px;padding:8px 12px;outline:none;margin-bottom:10px;word-break:break-all;}
 #splash{transition:opacity 0.3s ease-out;}
@@ -383,7 +384,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 <!-- INFO MODAL -->
 <div id="info-modal" class="modal-overlay" style="display:none">
   <div class="modal-box">
-    <div class="modal-title">Help</div>
+    <div class="modal-title">Info / About</div>
     <p style="font-size:13px;line-height:1.7;color:#aaa;margin-bottom:12px">
       <b style="color:#fff">Drag</b> players from bench to field slots, or between slots to swap. Bench scrolls horizontally — swipe left/right to see all players.<br><br>
       <b style="color:#fff">Double-tap</b> any player to edit name, goals, assists, threshold, or mark injured.<br><br>
@@ -392,6 +393,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
     </p>
     <hr class="modal-hr">
     <p style="font-size:12px;color:#6a7a8e;margin-bottom:14px">Built free, kept free. If it's helping, I'd appreciate the support. · Itsfloody</p>
+    <p style="font-size:11px;color:#2e3f52;text-align:center;margin-bottom:10px;letter-spacing:0.5px;" id="app-version">v1.0</p>
     <a href="https://ko-fi.com/itsfloody" target="_blank" rel="noopener"
        style="display:flex;align-items:center;justify-content:center;gap:10px;background:#FF5E5B;color:#fff;border-radius:10px;padding:12px 20px;text-decoration:none;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.3px;box-shadow:0 3px 14px rgba(255,94,91,0.4);margin-bottom:4px;">
       <span style="font-size:20px">☕</span> Buy Me a Coffee on Ko-fi
@@ -1184,6 +1186,19 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(reg => {
       console.log('[GDM] SW registered:', reg.scope);
+      // Ask the SW for its version and display it
+      navigator.serviceWorker.addEventListener('message', e => {
+        if (e.data && e.data.type === 'VERSION') {
+          const el = document.getElementById('app-version');
+          if (el) el.textContent = 'v' + e.data.version;
+        }
+      });
+      // Wait for SW to be active before messaging
+      const sw = reg.active || reg.installing || reg.waiting;
+      if (sw) {
+        const ask = () => sw.postMessage('GET_VERSION');
+        sw.state === 'activated' ? ask() : sw.addEventListener('statechange', e => { if (e.target.state === 'activated') ask(); });
+      }
     }).catch(err => {
       console.log('[GDM] SW registration failed:', err);
     });

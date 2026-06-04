@@ -1,7 +1,8 @@
 // Game Day Manager — Service Worker
 // Caches the app shell for full offline use on the sideline
 
-const CACHE = 'gdm-v1';
+const VERSION = '1.0';
+const CACHE = `gdm-v${VERSION}`;
 
 // Everything the app needs to run offline
 const PRECACHE = [
@@ -65,5 +66,12 @@ self.addEventListener('fetch', e => {
         });
       })
     );
+  }
+});
+
+// Let the page ask the SW for the current version
+self.addEventListener('message', e => {
+  if (e.data === 'GET_VERSION') {
+    e.source.postMessage({ type: 'VERSION', version: VERSION });
   }
 });
